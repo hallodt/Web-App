@@ -2,18 +2,51 @@
 @{
     ViewData["Title"] = "Home Page";
 }
+<body>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">WebApp</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+@*                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>*@
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Division" asp-action="Index">Division</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Departement" asp-action="Index">Departement</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="text-center">
+        <h1 class="display-4">Welcome</h1>
+        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    </div>
 
-<dl class="row">
-    <p><b>Nama Lengkap : </b>@Html.DisplayFor(model=>model.FullName)</p>
-    <p><b>Email : </b>@Html.DisplayFor(model=>model.Email)</p>
-    <p><b>Role : </b>@Html.DisplayFor(model=>model.Role)</p>
-</dl>
+    <dl class="row">
+        <p><b>Nama Lengkap : </b>@Html.DisplayFor(model=>model.FullName)</p>
+        <p><b>Email : </b>@Html.DisplayFor(model=>model.Email)</p>
+        <p><b>Role : </b>@Html.DisplayFor(model=>model.Role)</p>
+    </dl>
 
-<div>
-    <a asp-controller="Account" asp-action="GantiPassword">Ubah Password</a>
-</div>
+    <div>
+        <a asp-controller="Account" asp-action="GantiPassword">Ubah Password</a>
+    </div>
+
+</body>

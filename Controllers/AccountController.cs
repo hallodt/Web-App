@@ -34,7 +34,8 @@ namespace WebApp.Controllers
                 {
                     FullName = data.Employee.FullName,
                     Email = data.Employee.Email,
-                    Role = data.Role.Nama
+                    Role = data.Role.Nama,
+                    //Password = data.Password
                 };
                 return RedirectToAction("Index", "Home", responseLogin);
             }
@@ -84,8 +85,36 @@ namespace WebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult GantiPassword(string email,string oldPassword, string newPassword)
+        public IActionResult GantiPassword(string oldPassword, string newPassword)
         {
+            var data = myContext.Users
+                .Include(x => x.Employee)
+                .Include(x => x.Role)
+                .AsNoTracking()
+                .SingleOrDefault(x => x.Password.Equals(oldPassword));
+            if (data != null)
+            {
+                User user = new User()
+                {
+                   Id=data.Id,
+                   Password = newPassword,
+                   RoleId = data.RoleId
+                };
+                ResponseLogin responseLogin = new ResponseLogin()
+                {
+                    FullName = data.Employee.FullName,
+                    Email = data.Employee.Email,
+                    Role = data.Role.Nama,
+                    //Password = data.Password
+
+                };
+                myContext.Entry(user).State = EntityState.Modified;
+                var resultUser = myContext.SaveChanges();
+                if (resultUser > 0)
+                {
+                    return RedirectToAction("Index", "Home", responseLogin);
+                }
+            }
             return View();
         }
 
@@ -109,7 +138,7 @@ namespace WebApp.Controllers
                 {
                     Id = data.Id,
                     Password = newPassword,
-                    RoleId = data.RoleId
+                    RoleId=data.RoleId
                 };
                 myContext.Entry(user).State = EntityState.Modified;
                 var resultUser = myContext.SaveChanges();
