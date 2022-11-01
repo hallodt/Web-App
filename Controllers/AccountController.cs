@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApp.Context;
+using WebApp.Handler;
 using WebApp.Models;
 using WebApp.ViewModel;
 
@@ -27,17 +28,17 @@ namespace WebApp.Controllers
             var data = myContext.Users
                 .Include(x => x.Employee)
                 .Include(x => x.Role)
-                .SingleOrDefault(x => x.Employee.Email.Equals(email) && x.Password.Equals(password));
-            if (data != null)
+                .SingleOrDefault(x => x.Employee.Email.Equals(email));
+            var validate = Hashing.ValidatePass(password, data.Password);
+            if (data != null && validate == true)
             {
-                ResponseLogin responseLogin = new ResponseLogin()
-                {
-                    FullName = data.Employee.FullName,
-                    Email = data.Employee.Email,
-                    Role = data.Role.Nama,
-                    //Password = data.Password
-                };
-                return RedirectToAction("Index", "Home", responseLogin);
+                HttpContext.Session.SetInt32("Id", data.Id);
+                HttpContext.Session.SetString("FullName", data.Employee.FullName);
+                HttpContext.Session.SetString("Email", data.Employee.Email);
+                HttpContext.Session.SetString("Role", data.Role.Nama);
+                
+                
+                return RedirectToAction("Index", "Home");
             }
             return View();
         }
@@ -52,6 +53,14 @@ namespace WebApp.Controllers
         [HttpPost]
         public IActionResult Register(string fullName, string email, DateTime birthdate, string password)
         {
+            //var data = myContext.Users
+            //.Include(x => x.Employee)
+            //.Include(x => x.Role)
+            //.SingleOrDefault(x => x.Employee.Email.Equals(email));
+            if (myContext.Employees.Any(x => x.Email.Equals(email)))
+            {
+                return View();
+            }
             Employee employee = new Employee()
             {
                 FullName = fullName,
@@ -66,7 +75,7 @@ namespace WebApp.Controllers
                 User user = new User()
                 {
                     Id = id,
-                    Password = password,
+                    Password =Hashing.HashPass(password),
                     RoleId = 1
                 };
                 myContext.Users.Add(user);
@@ -90,23 +99,16 @@ namespace WebApp.Controllers
             var data = myContext.Users
                 .Include(x => x.Employee)
                 .Include(x => x.Role)
-                .SingleOrDefault(x => x.Employee.Email.Equals(email) && x.Password.Equals(oldPassword));
-            if (data != null)
+                .SingleOrDefault(x => x.Employee.Email.Equals(email));
+            var validate = Hashing.ValidatePass(oldPassword, data.Password);
+            if (data != null && validate)
             {
-                data.Password = newPassword;
-                ResponseLogin responseLogin = new ResponseLogin()
-                {
-                    FullName = data.Employee.FullName,
-                    Email = data.Employee.Email,
-                    Role = data.Role.Nama,
-                    //Password = data.Password
-
-                };
+                data.Password = Hashing.HashPass(newPassword);
                 myContext.Entry(data).State = EntityState.Modified;
                 var resultUser = myContext.SaveChanges();
                 if (resultUser > 0)
                 {
-                    return RedirectToAction("Index", "Home", responseLogin);
+                    return RedirectToAction("Index", "Home");
                 }
             }
             return View();
@@ -119,14 +121,15 @@ namespace WebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult LupaPassword(string email, DateTime birthdate,string newPassword)
+        public IActionResult LupaPassword(string email, DateTime birthdate,string newPassword,User user)
         {
             var data = myContext.Users
             .Include(x => x.Employee)
             .SingleOrDefault(x => x.Employee.Email.Equals(email) && x.Employee.BirthDate.Equals(birthdate));
+            //var validate = Hashing.ValidatePass(data.Password, user.Password);
             if (data != null)
             {
-                data.Password = newPassword;
+                data.Password = Hashing.HashPass(newPassword);
                 myContext.Entry(data).State = EntityState.Modified;
                 var resultUser = myContext.SaveChanges();
                 if (resultUser > 0)

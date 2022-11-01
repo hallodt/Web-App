@@ -262,3 +262,4 @@ C:\Users\Faris\source\repos\Rakyat_Net\WebApp\bin\Debug\net6.0\runtimes\unix\lib
 C:\Users\Faris\source\repos\Rakyat_Net\WebApp\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
 C:\Users\Faris\source\repos\Rakyat_Net\WebApp\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\Faris\source\repos\Rakyat_Net\WebApp\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
+C:\Users\Faris\source\repos\Rakyat_Net\WebApp\bin\Debug\net6.0\BCrypt.Net-Core.dll

@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
+using WebApp.Base;
 
 namespace WebApp.Models
 {
-   public class Division
+   public class Division : BaseModel
     {
         public Division(int Id, string Nama)
         {

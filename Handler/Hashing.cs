@@ -1,0 +1,20 @@
+﻿namespace WebApp.Handler
+{
+    public class Hashing
+    {
+        private static string GetRandomSalt()
+        {
+            return BCrypt.Net.BCrypt.GenerateSalt(12);
+        }
+
+        public static string HashPass(string password)
+        {
+            return BCrypt.Net.BCrypt.HashPassword(password, GetRandomSalt());
+        }
+
+        public static bool ValidatePass(string password, string correctHash)
+        {
+            return BCrypt.Net.BCrypt.Verify(password, correctHash);
+        }
+    }
+}

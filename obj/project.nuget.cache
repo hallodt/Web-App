@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "M1Z9FM+2aP8DrZcHQsiAV+ODyAsdqrGsfyMzCYFnEkaRRQNibgopBjv+qzBfA1fxeMZR/vrd8wAL5up20dE6Fw==",
+  "dgSpecHash": "owXbl0LPwJSJvpt6GzjifRXnJgMLKfxot7NIqYhRfhsYNIVph18OA+yjoAk3ylsGjW95qGf/a3jpKjbbjP1vGA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Faris\\source\\repos\\Rakyat_Net\\WebApp\\WebApp.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Faris\\.nuget\\packages\\bcrypt.net-core\\1.6.0\\bcrypt.net-core.1.6.0.nupkg.sha512",
     "C:\\Users\\Faris\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Faris\\.nuget\\packages\\messagepack\\2.1.152\\messagepack.2.1.152.nupkg.sha512",
     "C:\\Users\\Faris\\.nuget\\packages\\messagepack.annotations\\2.1.152\\messagepack.annotations.2.1.152.nupkg.sha512",

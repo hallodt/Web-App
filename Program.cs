@@ -8,6 +8,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<MyContext>(option =>
 option.UseSqlServer(builder.Configuration.GetConnectionString("MyConnection")));
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(15);
+    //options.Cookie.HttpOnly = true;
+    //options.Cookie.IsEssential = true;
+});
 
 var app = builder.Build();
 
@@ -25,6 +31,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+app.UseSession();
 
 app.MapControllerRoute(
     name: "default",

@@ -1,6 +1,9 @@
-﻿@model WebApp.ViewModel.ResponseLogin
+﻿@using Microsoft.AspNetCore.Http
 @{
     ViewData["Title"] = "Home Page";
+    var Nama = Context.Session.GetString("FullName");
+    var Email = Context.Session.GetString("Email");
+    var Role = Context.Session.GetString("Role");
 }
 <body>
 
@@ -38,11 +41,10 @@
         <h1 class="display-4">Welcome</h1>
         <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
     </div>
-
     <dl class="row">
-        <p><b>Nama Lengkap : </b>@Html.DisplayFor(model=>model.FullName)</p>
-        <p><b>Email : </b>@Html.DisplayFor(model=>model.Email)</p>
-        <p><b>Role : </b>@Html.DisplayFor(model=>model.Role)</p>
+        <p><b>Nama Lengkap :</b> @Nama</p>
+        <p><b>Email : </b> @Email</p>
+        <p><b>Role : </b> @Role</p>
     </dl>
 
     <div>

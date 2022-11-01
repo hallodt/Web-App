@@ -8,14 +8,17 @@
     <div class="col-md-4">
         <form method="post" asp-action="Login">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
             <div class="form-group">
                 <label class="control-label">Email</label>
                 <input name="email" class="form-control" type="text" placeholder="Masukan Email" />
             </div>
+
             <div class="form-group">
                 <label class="control-label">Password</label>
                 <input name="password" class="form-control" type="password" placeholder="Masukan Password" />
             </div>
+
             <br />
             <div class="form-group">
                 <input type="submit" value="Login" class="btn btn-primary" />
