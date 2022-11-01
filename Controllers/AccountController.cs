@@ -85,21 +85,15 @@ namespace WebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult GantiPassword(string oldPassword, string newPassword)
+        public IActionResult GantiPassword(string email, string oldPassword, string newPassword)
         {
             var data = myContext.Users
                 .Include(x => x.Employee)
                 .Include(x => x.Role)
-                .AsNoTracking()
-                .SingleOrDefault(x => x.Password.Equals(oldPassword));
+                .SingleOrDefault(x => x.Employee.Email.Equals(email) && x.Password.Equals(oldPassword));
             if (data != null)
             {
-                User user = new User()
-                {
-                   Id=data.Id,
-                   Password = newPassword,
-                   RoleId = data.RoleId
-                };
+                data.Password = newPassword;
                 ResponseLogin responseLogin = new ResponseLogin()
                 {
                     FullName = data.Employee.FullName,
@@ -108,7 +102,7 @@ namespace WebApp.Controllers
                     //Password = data.Password
 
                 };
-                myContext.Entry(user).State = EntityState.Modified;
+                myContext.Entry(data).State = EntityState.Modified;
                 var resultUser = myContext.SaveChanges();
                 if (resultUser > 0)
                 {
@@ -129,18 +123,11 @@ namespace WebApp.Controllers
         {
             var data = myContext.Users
             .Include(x => x.Employee)
-            .Include(x => x.Role)
-            .AsNoTracking()
             .SingleOrDefault(x => x.Employee.Email.Equals(email) && x.Employee.BirthDate.Equals(birthdate));
             if (data != null)
             {
-                User user = new User()
-                {
-                    Id = data.Id,
-                    Password = newPassword,
-                    RoleId=data.RoleId
-                };
-                myContext.Entry(user).State = EntityState.Modified;
+                data.Password = newPassword;
+                myContext.Entry(data).State = EntityState.Modified;
                 var resultUser = myContext.SaveChanges();
                 if (resultUser > 0)
                 {
