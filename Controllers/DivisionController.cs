@@ -21,17 +21,17 @@ namespace WebApp.Controllers
         // GET ALL
         public IActionResult Index()
         {
-            var role = HttpContext.Session.GetString("Role");
-            if (role == "Admin")
-            {
-                var data = myContext.Divisions.ToList();
-                return View(data);
-            }
-            else if (role == null)
-            {
-                return RedirectToAction("UnAuthorized", "ErrorPage");
-            }
-            return RedirectToAction("Forbidden", "ErrorPage");
+            //var role = HttpContext.Session.GetString("Role");
+            //if (role == "Admin")
+            //{
+            var data = myContext.Divisions.ToList();
+            return View(data);
+            //}
+            //else if (role == null)
+            //{
+            //    return RedirectToAction("UnAuthorized", "ErrorPage");
+            //}
+            //return RedirectToAction("Forbidden", "ErrorPage");
         }
 
         // GET BY ID

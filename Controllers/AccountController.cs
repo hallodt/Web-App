@@ -38,7 +38,7 @@ namespace WebApp.Controllers
                 HttpContext.Session.SetString("Role", data.Role.Nama);
                 
                 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Departement");
             }
             return View();
         }

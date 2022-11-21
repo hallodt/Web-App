@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "RPc+FhxFSAeGkuH0KUvp9BFyWqKIqvQprEpkmleU//I=",
+  "Hash": "U3uDXBKGb8ImIVvG3dU4oQp5X1CqjyE+/LNINX6GZS0=",
   "Source": "WebApp",
   "BasePath": "_content/WebApp",
   "Mode": "Default",
@@ -100,6 +100,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\Departement.js"
+    },
+    {
+      "Identity": "C:\\Users\\Faris\\source\\repos\\Rakyat_Net\\WebApp\\wwwroot\\js\\Division.js",
+      "SourceId": "WebApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Faris\\source\\repos\\Rakyat_Net\\WebApp\\wwwroot\\",
+      "BasePath": "_content/WebApp",
+      "RelativePath": "js/Division.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\Division.js"
     },
     {
       "Identity": "C:\\Users\\Faris\\source\\repos\\Rakyat_Net\\WebApp\\wwwroot\\js\\site.js",

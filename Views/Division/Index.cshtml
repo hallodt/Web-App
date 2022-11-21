@@ -5,12 +5,82 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
-
-<p>
+@*<p>
     <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+</p>*@
+
+<div class="card py-4 px-4">
+    <div class="table-responsive">
+        <table class="table align-items-center mb-0" id="tableDivision">
+            <h5 style="float:left;">Data Division</h5>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal" style="float:right; position:relative;">
+                Tambah Data
+            </button>
+            <thead>
+                <tr>
+                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">ID</th>
+                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">Nama</th>
+                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!--   Modals   -->
+<div class="modal fade" id="detailModal" tabindex="1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Detail</h5>
+            </div>
+            <div class="modal-body">
+                <div id="detailData">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="editModal" tabindex="1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Detail</h5>
+            </div>
+            <div class="modal-body">
+                <div id="editData">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="addModal" tabindex="1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Data</h5>
+            </div>
+            <div class="modal-body">
+
+                <input type="hidden" class="form-control" id="hideId">
+
+                <h5>Nama Division</h5>
+                <input type="text" class="form-control" id="namaDivision">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="editBtn" onclick="addDivision()">Tambah Data</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<table class="table">
     <thead>
         <tr>
             <th>
@@ -52,4 +122,4 @@
         </tr>
 }
     </tbody>
-</table>
+</table>*@
