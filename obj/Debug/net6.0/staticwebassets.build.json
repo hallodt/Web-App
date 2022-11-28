@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "U3uDXBKGb8ImIVvG3dU4oQp5X1CqjyE+/LNINX6GZS0=",
+  "Hash": "lnL4ybp0xBu5KOMCBInqgUe/U3VSV2iDWJayBeWB8v0=",
   "Source": "WebApp",
   "BasePath": "_content/WebApp",
   "Mode": "Default",
@@ -117,6 +117,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\Division.js"
+    },
+    {
+      "Identity": "C:\\Users\\Faris\\source\\repos\\Rakyat_Net\\WebApp\\wwwroot\\js\\Login.js",
+      "SourceId": "WebApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Faris\\source\\repos\\Rakyat_Net\\WebApp\\wwwroot\\",
+      "BasePath": "_content/WebApp",
+      "RelativePath": "js/Login.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\Login.js"
     },
     {
       "Identity": "C:\\Users\\Faris\\source\\repos\\Rakyat_Net\\WebApp\\wwwroot\\js\\site.js",

@@ -4,12 +4,11 @@
 
         ajax: {
             url: 'https://localhost:7068/api/Departement',
+            type: "GET",        
             dataSrc: 'data',
-            "headers": {
-                'Content-Type': 'application/x-www-form-urlencoded'
+            headers: {
+                'Authorization': "Bearer " + sessionStorage.getItem("token"),
             },
-            "type": "GET"
-            
         },
         columns: [
             { data: 'id',},
@@ -44,6 +43,138 @@
             }
         ]
 
+    });
+
+
+    $.ajax({
+        url: 'https://localhost:7068/api/Departement',
+        headers: {
+            'Authorization': "Bearer " + sessionStorage.getItem("token"),
+        },
+    }).done((data) => {
+        console.log(data);
+        var divisionID = data.data
+            .map(x => ({ divisionID: x.divisionID }));
+        var { divisionID1, divisionID2, divisionID3, divisionID4 } = divisionID.reduce((previous, current) => {
+            if (current.divisionID === 1) {
+                //... adalah spread operator
+                // spread untuk memecah array-nya 
+                return { ...previous, divisionID1: previous.divisionID1 + 1 }
+            }
+
+            if (current.divisionID === 2) {
+                return { ...previous, divisionID2: previous.divisionID2 + 1 }
+            }
+
+            if (current.divisionID === 3) {
+                return { ...previous, divisionID3: previous.divisionID3 + 1 }
+            }
+
+            if (current.divisionID === 4) {
+                return { ...previous, divisionID4: previous.divisionID4 + 1 }
+            }
+        }, { divisionID1: 0, divisionID2: 0, divisionID3: 0, divisionID4: 0 })
+
+        var options = {
+            series: [divisionID1, divisionID2, divisionID3, divisionID4],
+            chart: {
+                width: 400,
+                height:'200%',
+                type: 'pie',
+            },
+            labels: ['Division Id: 1', 'Division Id: 2', 'Division Id: 3', 'Division Id: 4'],
+            responsive: [{
+                breakpoint: 480,
+                options: {
+                    chart: {
+                        width: 500
+                    },
+                    legend: {
+                        show: true,
+                        position: 'right',
+                    }
+                }
+            }]
+        };
+
+        var options2 = {
+            series: [{
+                data: [divisionID1, divisionID2, divisionID3, divisionID4],
+            }],
+            chart: {
+                height: 285,
+                type: 'bar',
+                events: {
+                    click: function (chart, w, e) {
+                        // console.log(chart, w, e)
+                    }
+                }
+            },
+            plotOptions: {
+                bar: {
+                    columnWidth: '45%',
+                    distributed: true,
+                }
+            },
+            dataLabels: {
+                enabled: false
+            },
+            legend: {
+                show: false
+            },
+            xaxis: {
+                categories: [
+                    ['Division Id: 1'],
+                    ['Division Id: 2'],
+                    ['Division Id: 3'],
+                    ['Division Id: 4'],
+                ],
+                labels: {
+                    style: {
+                        fontSize: '12px'
+                    }
+                }
+            }
+        };
+
+        var options3 = {
+            series: [{
+                data: [divisionID1, divisionID2, divisionID3, divisionID4],
+            }],
+            chart: {
+                height: 350,
+                type: 'line',
+                zoom: {
+                    enabled: false
+                }
+            },
+            dataLabels: {
+                enabled: false
+            },
+            stroke: {
+                curve: 'straight'
+            },
+            title: {
+                text: 'Jumlah Division Pada Departement',
+                align: 'left'
+            },
+            grid: {
+                row: {
+                    colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+                    opacity: 0.5
+                },
+            },
+            xaxis: {
+                categories: ['Division Id: 1', 'Division Id: 2', 'Division Id: 3', 'Division Id: 4'],
+            }
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chartPie"), options);
+        var chartBar = new ApexCharts(document.querySelector("#chartBar"), options2);
+        var chartLine = new ApexCharts(document.querySelector("#chartLine"), options3);
+        chart.render();
+        chartBar.render();
+        chartLine.render()
     });
 });
 
@@ -82,7 +213,7 @@ function editDepartement(id) {
             <h5>Nama Departement<h5><input type="text" class="form-control" id="departNama" value="${res.data.nama}">
             <h5>Division ID<h5><input type="text" class="form-control" id="departDivisionID" value="${res.data.divisionID}">
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="editBtn" onclick="saveEdit('${res.data.id}')">Simpan Perubahan</button>
+                    <button type="button" class="btn btn-primary" id="editBtn" onclick="saveEditDepartement('${res.data.id}')">Simpan Perubahan</button>
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                 </div>
             `;
@@ -93,7 +224,7 @@ function editDepartement(id) {
     });
 }
 
-function saveEdit(id) {
+function saveEditDepartement(id) {
     var Id = id;
     var Nama = $('#departNama').val();
     var DivisionID = parseInt($('#departDivisionID').val());
